@@ -1,0 +1,113 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API Template Swagger",
+    "description": "Template para design de APIs usando o swagger 2.0",
+    "version": "1.0"
+  },
+  "host": "localhost",
+  "basePath": "/base/v1",
+  "tags": [
+    {
+      "name": "tag-base"
+    }
+  ],
+  "security": [
+    {
+      "client_id": []
+    },
+    {
+      "access_token": []
+    }
+  ],
+  "securityDefinitions": {
+    "client_id": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "client_id"
+    },
+    "access_token": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "access_token"
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/resources": {
+      "get": {
+        "tags": [
+          "tag-base"
+        ],
+        "summary": "Obtem coleção",
+        "description": "Obtem uma coleção de alguma coisa que meu recurso representa.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "alguma-query-param",
+            "type": "string",
+            "description": "Algum parametro que servira de filtro para essa busca",
+            "required": false
+          }
+        ],
+        "security": [
+          {
+            "client_id": []
+          },
+          {
+            "access_token": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/recurso"
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado."
+          },
+          "403": {
+            "description": "Proibido."
+          },
+          "500": {
+            "description": "Erro Interno."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "recurso": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Identificadro do recurso."
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "Nome do recurso."
+        }
+      }
+    }
+  }
+}
